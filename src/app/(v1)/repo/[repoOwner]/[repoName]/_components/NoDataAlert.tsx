@@ -10,7 +10,7 @@ export default function NoDataAlert({ name }: { name: string }) {
           No Data Available
         </AlertTitle>
         <AlertDescription className="text-yellow-700/90 dark:text-yellow-400/90">
-          We couldn't find any {name} for this repository.
+          We couldn&apos;t find any {name} for this repository.
         </AlertDescription>
       </div>
     </Alert>

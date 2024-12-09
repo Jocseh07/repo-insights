@@ -4,10 +4,10 @@ import Rates from "@/components/Rates";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className="flex min-h-dvh flex-col space-y-2">
       <NavBar />
       <Rates />
-      <div className="container mx-auto p-2">{children}</div>
+      <div className="box">{children}</div>
       <Footer />
     </div>
   );

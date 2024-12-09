@@ -1,10 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import useUserRepos from "@/hooks/github/useUserRepos";
 import { Clock, GitFork, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "timeago.js";
-import Pagination from "@/components/PaginationComponent";
 import { useSearchParams } from "next/dist/client/components/navigation";
 import UserPageSkeleton from "./UserPageSkeleton";
 import UserPageError from "./UserPageError";
@@ -12,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function UserPageRepositories() {
   const searchParams = useSearchParams();
-  const page = parseInt(searchParams.get("page") || "1");
+  const page = parseInt(searchParams.get("page") ?? "1");
   const sort = searchParams.get("sort") ?? "updated";
   const order = searchParams.get("order") ?? "desc";
 
@@ -78,7 +77,7 @@ export default function UserPageRepositories() {
                 <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm text-muted-foreground">
-                    Updated {format(repo.updated_at || new Date())}
+                    Updated {format(repo.updated_at ?? new Date())}
                   </span>
                 </div>
               </div>

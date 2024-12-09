@@ -12,10 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { FileText } from "lucide-react";
 import useRepoReadme from "@/hooks/github/useRepoReadme";
-import ReactMarkdown from "react-markdown";
-import { Skeleton } from "@/components/ui/skeleton";
-import Markdown from "markdown-to-jsx";
 import MDEditor from "@uiw/react-md-editor";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function RepositoryReadmeDialog({
   repoOwner,

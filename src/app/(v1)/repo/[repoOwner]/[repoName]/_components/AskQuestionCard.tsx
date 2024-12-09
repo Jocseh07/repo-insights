@@ -14,22 +14,16 @@ import MDEditor from "@uiw/react-md-editor";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { FileReferences } from "@/types/types";
-import CodeReferences from "@/app/(routes)/dashboard/CodeReferences";
 import { askQuestion } from "@/server/actions/questions/questions";
 import { saveAnswer } from "@/server/actions/answers/answers";
+import CodeReferences from "@/app/(v1)/qa/_components/CodeReferences";
+import { type FileReferences } from "@/types/types";
 
 interface AskQuestionCardProps {
-  repoOwner: string;
-  repoName: string;
   repoId: number;
 }
 
-export default function AskQuestionCard({
-  repoOwner,
-  repoName,
-  repoId,
-}: AskQuestionCardProps) {
+export default function AskQuestionCard({ repoId }: AskQuestionCardProps) {
   const [question, setQuestion] = useState("");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);

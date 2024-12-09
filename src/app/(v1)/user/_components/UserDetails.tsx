@@ -3,8 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import useUserDetails from "@/hooks/github/useUserDetails";
 import Image from "next/image";
-import Link from "next/link";
-import { Building2, Link as LinkIcon, MapPin, Users } from "lucide-react";
+import { Users } from "lucide-react";
 import UserPageSkeleton from "./UserPageSkeleton";
 import UserPageError from "./UserPageError";
 
@@ -19,7 +18,7 @@ export default function UserDetails() {
       <Card>
         <CardHeader className="flex flex-row items-center gap-4">
           <Image
-            src={user?.data.avatar_url || ""}
+            src={user?.data.avatar_url ?? ""}
             alt={`${user?.data.login}'s avatar`}
             width={100}
             height={100}

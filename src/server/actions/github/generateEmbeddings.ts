@@ -1,6 +1,6 @@
 "use server";
 import { generateCodeEmbeddings, summarizeCode } from "../gemini/gemini";
-import { Document } from "@langchain/core/documents";
+import { type Document } from "@langchain/core/documents";
 
 export const generateEmbeddings = async ({ docs }: { docs: Document[] }) => {
   return await Promise.all(
@@ -10,8 +10,8 @@ export const generateEmbeddings = async ({ docs }: { docs: Document[] }) => {
       return {
         summary,
         embedding,
-        sourceCode: JSON.parse(JSON.stringify(doc.pageContent)),
-        filename: doc.metadata.source,
+        sourceCode: doc.pageContent,
+        filename: doc.metadata.source as string,
       };
     }),
   );

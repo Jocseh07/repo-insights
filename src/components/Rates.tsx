@@ -19,8 +19,8 @@ export default function Rates() {
   const isSearchWarning = rates.resources.search.remaining <= 5;
 
   return (
-    <div className="sticky top-2 z-10 m-2 rounded-md border border-sidebar-border bg-sidebar p-2 shadow">
-      <div className="container mx-auto w-full">
+    <div className="floating-box sticky top-2 z-10">
+      <div className="box w-full">
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
           <Card
             className={cn(

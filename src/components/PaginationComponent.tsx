@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const Pagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const searchParams = useSearchParams();
-  const page = parseInt(searchParams.get("page") || "1");
+  const page = parseInt(searchParams.get("page") ?? "1");
 
   useEffect(() => {
     setCurrentPage(page);

@@ -2,7 +2,7 @@
 
 import { and, eq } from "drizzle-orm";
 import { db } from "../db";
-import { project, NewProject, Project } from "../db/schema";
+import { project, type NewProject, type Project } from "../db/schema";
 import { getUserId } from "./helpers";
 
 export const createProject = async (data: Omit<NewProject, "userId">) => {

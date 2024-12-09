@@ -21,7 +21,8 @@ export default function RepositorySearchBar() {
         name="query"
         defaultValue={query ?? ""}
         placeholder="Search repositories"
-        className="h-auto border-border bg-background/10 px-6 py-3 text-foreground backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-ring"
+        // className="h-auto border-border bg-background/10 px-6 py-3 text-foreground backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-ring"
+        className="h-auto p-3 text-sm md:text-base"
       />
       <Button
         className={cn(
@@ -31,7 +32,7 @@ export default function RepositorySearchBar() {
         type="submit"
       >
         <Search className="h-4 w-4" />
-        <span>Search</span>
+        <span className="hidden md:block">Search</span>
       </Button>
     </Form>
   );

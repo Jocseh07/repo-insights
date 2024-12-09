@@ -2,8 +2,8 @@
 
 import { db } from "@/server/db";
 import { question } from "@/server/db/schema";
+import { type FileReferences } from "@/types/types";
 import { getUserId } from "../helpers";
-import { FileReferences } from "@/types/types";
 
 export const saveAnswer = async ({
   questionAsked,

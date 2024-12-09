@@ -1,9 +1,9 @@
 "use server";
 
-import { Project } from "@/server/db/schema";
+import { type Project } from "@/server/db/schema";
 import { generateEmbeddings } from "@/server/actions/github/generateEmbeddings";
 import { insertSourceCodeEmbedding } from "@/server/actions/github/insertSourceCodeEmbedding";
-import { Document } from "@langchain/core/documents";
+import { type Document } from "@langchain/core/documents";
 
 export const indexFiles = async ({
   docs,

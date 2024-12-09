@@ -1,17 +1,16 @@
 "use client";
 import { Octokit } from "octokit";
-import { getToken } from "@/actions/user/getToken";
-import { useAuth, useUser } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import {
   createContext,
-  useState,
+  type Dispatch,
+  type SetStateAction,
   useEffect,
-  useCallback,
-  Dispatch,
-  SetStateAction,
+  useState,
 } from "react";
 import { queryClient } from "./Providers";
+import { getToken } from "@/server/actions/user/getToken";
 
 export const OctokitContext = createContext<{
   octokit: Octokit;
@@ -42,7 +41,7 @@ export default function OctokitProvider({
     } else {
       setCurrentOctokit(new Octokit());
     }
-    queryClient.invalidateQueries({ queryKey: ["important"] });
+    void queryClient.invalidateQueries({ queryKey: ["important"] });
   }, [userId, token]);
 
   return (

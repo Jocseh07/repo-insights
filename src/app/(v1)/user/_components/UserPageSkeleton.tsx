@@ -1,13 +1,12 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Clock, GitFork, Star } from "lucide-react";
-import Pagination from "@/components/PaginationComponent";
 
 export default function UserPageSkeleton() {
   return (
     <div className="container mx-auto space-y-4">
       <h1 className="mb-6 text-2xl font-bold">Your Repositories</h1>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
-        {[...Array(10)].map((_, i) => (
+        {Array.from({ length: 10 }).map((_, i) => (
           <Card key={i} className="w-full animate-pulse">
             <CardHeader>
               <div className="flex items-center gap-3">

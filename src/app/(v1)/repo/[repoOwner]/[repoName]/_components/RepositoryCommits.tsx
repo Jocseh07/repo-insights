@@ -44,7 +44,7 @@ export default function RepositoryCommits({
               <GitCommit className="h-4 w-4" />
               <span className="flex-1 truncate">{commit.commit.message}</span>
               <span className="w-24 text-right text-xs">
-                {format(commit.commit.author?.date || "")}
+                {format(commit.commit.author?.date ?? "")}
               </span>
             </Link>
           ))}

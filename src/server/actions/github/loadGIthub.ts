@@ -1,7 +1,7 @@
 "use server";
 import { GithubRepoLoader } from "@langchain/community/document_loaders/web/github";
 import { getUserId } from "../helpers";
-import { getToken } from "@/actions/user/getToken";
+import { getToken } from "@/server/actions/user/getToken";
 
 export const loadGithubFiles = async ({ repoUrl }: { repoUrl: string }) => {
   const userId = await getUserId();

@@ -56,8 +56,8 @@ export async function askQuestion({
   for (const doc of result) {
     context += `Source: ${doc.filename} \nSource Code: ${doc.sourceCode}\nSummary: ${doc.summary}\nSimilarity: ${doc.similarity}\n\n`;
   }
-  (async () => {
-    const { textStream } = await streamText({
+  await (async () => {
+    const { textStream } = streamText({
       model: google("gemini-1.5-flash"),
       prompt: streamTextPrompt({
         context,

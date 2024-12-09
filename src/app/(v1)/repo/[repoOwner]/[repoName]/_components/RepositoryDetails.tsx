@@ -41,7 +41,7 @@ export default function RepositoryDetails({
       const exists = await checkProjectExists({ repoId: repo.data.id });
       setProjectExists(!!exists);
     };
-    checkingProjectExists();
+    void checkingProjectExists();
   }, [repo?.data.id]);
   if (isLoading) return <RepositoryDetailsSkeleton />;
   if (error || !repo) return <RepositoryError name="details" />;
@@ -167,11 +167,7 @@ export default function RepositoryDetails({
           </div>
         ) : (
           <div className="transition-all duration-200 hover:opacity-95">
-            <AskQuestionCard
-              repoOwner={repoOwner}
-              repoName={repoName}
-              repoId={repo.data.id}
-            />
+            <AskQuestionCard repoId={repo.data.id} />
           </div>
         )}
       </SignedIn>

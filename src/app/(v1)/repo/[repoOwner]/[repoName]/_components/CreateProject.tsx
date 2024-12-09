@@ -102,7 +102,7 @@ export const CreateProject = ({
         <CardContent>
           <div className="flex flex-col items-center space-y-4">
             <p className="text-center text-muted-foreground">
-              Create a project to enable AI-powered code assistance. We'll
+              Create a project to enable AI-powered code assistance. We&apos;ll
               analyze your repository to provide intelligent answers to your
               questions about the codebase.
             </p>

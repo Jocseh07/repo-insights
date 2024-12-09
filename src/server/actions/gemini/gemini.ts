@@ -1,7 +1,7 @@
 import { examplePrompt, summarizeCodePrompt } from "@/data/prompts";
 import { env } from "@/env";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Document } from "@langchain/core/documents";
+import { type Document } from "@langchain/core/documents";
 
 const genAi = new GoogleGenerativeAI(env.GEMINI_API_KEY);
 const model = genAi.getGenerativeModel({
@@ -20,7 +20,10 @@ export const summarizeCode = async ({ doc }: { doc: Document }) => {
   const code = doc.pageContent.slice(0, 10000);
   try {
     const response = await model.generateContent([
-      summarizeCodePrompt({ code, filename: doc.metadata.source }),
+      summarizeCodePrompt({
+        code,
+        filename: doc.metadata.source as string,
+      }),
     ]);
     return response.response.text();
   } catch {

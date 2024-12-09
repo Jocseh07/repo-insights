@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/server/db";
-import { Project, sourceCodeEmbedding } from "@/server/db/schema";
+import { type Project, sourceCodeEmbedding } from "@/server/db/schema";
 
 export const insertSourceCodeEmbedding = async ({
   allEmbeddings,

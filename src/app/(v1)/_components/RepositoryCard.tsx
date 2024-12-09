@@ -1,8 +1,8 @@
 "use client";
 import { Star, GitFork, Clock } from "lucide-react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { queryClient } from "./providers/Providers";
-import { ErrorRepositoryCard } from "./ErrorRepositoryCard";
+import { queryClient } from "../../../components/providers/Providers";
+import { ErrorRepositoryCard } from "../qa/_components/ErrorRepositoryCard";
 import { RepositoryCardSkeletons } from "./RepositoryCardSkeletons";
 import { format } from "timeago.js";
 import Image from "next/image";
@@ -31,7 +31,7 @@ export function RepositoryCard({
     sort,
   });
 
-  queryClient.invalidateQueries({ queryKey: ["rateLimit"] });
+  void queryClient.invalidateQueries({ queryKey: ["rateLimit"] });
   if (isPending) return <RepositoryCardSkeletons number={per_page} />;
   if (repos === undefined && !isPending) return <ErrorRepositoryCard />;
 
@@ -39,13 +39,13 @@ export function RepositoryCard({
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
       {repos?.data.items.map((repo) => (
         <Card
-          key={`${repo.owner}/${repo.name}/${repo.id}`}
+          key={`${repo.owner?.login}/${repo.name}/${repo.id}`}
           className="w-full transition-shadow hover:shadow-md"
         >
           <CardHeader>
             <div className="flex items-center gap-3">
               <Image
-                src={repo.owner?.avatar_url || ""}
+                src={repo.owner?.avatar_url ?? ""}
                 alt={`${repo.owner?.login}'s avatar`}
                 width={40}
                 height={40}
@@ -65,7 +65,11 @@ export function RepositoryCard({
                   <div className="inline-block">
                     <Link
                       href={`/search?query=${repo.language}`}
-                      className={`rounded-full ${languageColors[repo.language] || languageColors.default} px-3 py-1 text-xs font-semibold shadow-sm ring-2 ring-inset ring-primary/20`}
+                      className={`rounded-full px-3 py-1 text-xs font-semibold shadow-sm ring-2 ring-inset ring-primary/20 ${
+                        languageColors.find(
+                          (lang) => lang.name === repo.language,
+                        )?.color
+                      }`}
                     >
                       {repo.language}
                     </Link>

@@ -8,7 +8,6 @@ import RepositoryReleases from "./_components/RepositoryReleases";
 import { Tabs, TabsContent, TabsTrigger, TabsList } from "@/components/ui/tabs";
 import RepositoryIssues from "./_components/RepositoryIssues";
 
-
 export default function RepoDetails() {
   const params = useParams<{ repoOwner: string; repoName: string }>();
   const { repoOwner, repoName } = params;
@@ -16,7 +15,6 @@ export default function RepoDetails() {
   return (
     <div className="space-y-6">
       <RepositoryDetails repoOwner={repoOwner} repoName={repoName} />
-
       <Tabs defaultValue="branches">
         <TabsList className="w-full justify-start">
           <TabsTrigger value="branches">Branches</TabsTrigger>

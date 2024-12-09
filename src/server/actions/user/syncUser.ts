@@ -6,5 +6,5 @@ import { user, type NewUser } from "@/server/db/schema";
 export async function syncUser(data: NewUser) {
   try {
     await db.insert(user).values(data);
-  } catch (error) {}
+  } catch {}
 }

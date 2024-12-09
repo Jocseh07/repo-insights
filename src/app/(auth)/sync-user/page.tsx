@@ -1,4 +1,4 @@
-import { syncUser } from "@/actions/user/syncUser";
+import { syncUser } from "@/server/actions/user/syncUser";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 

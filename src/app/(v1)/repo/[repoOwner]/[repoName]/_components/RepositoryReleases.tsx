@@ -44,7 +44,7 @@ export default function RepositoryReleases({
               <Tag className="h-4 w-4" />
               <span className="break-all">{release.tag_name}</span>
               <span className="ml-auto text-xs">
-                {format(release.published_at || "")}
+                {format(release.published_at ?? "")}
               </span>
             </Link>
           ))}

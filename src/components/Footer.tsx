@@ -1,8 +1,8 @@
 export default function Footer() {
   const currentYear = new Date(performance.now()).getFullYear();
   return (
-    <div className="m-2 mt-auto rounded-md border border-sidebar-border bg-sidebar p-2 shadow">
-      <div className="container mx-auto flex w-full flex-col items-center justify-center space-y-2">
+    <div className="floating-box !mb-2 !mt-auto">
+      <div className="box flex w-full flex-col items-center justify-center space-y-2">
         <div className="flex items-center space-x-4">
           <a
             href="https://github.com/Jocseh07"

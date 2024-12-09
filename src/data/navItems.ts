@@ -1,4 +1,4 @@
-import { Bot, CreditCard, LayoutDashboard, Presentation } from "lucide-react";
+import { Bot, LayoutDashboard } from "lucide-react";
 
 export const navItems = [
   {

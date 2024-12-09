@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { RepositoryCard } from "@/components/RepositoryCard";
+import { RepositoryCard } from "@/app/(v1)/_components/RepositoryCard";
 import FilterComponent from "@/components/FilterComponent";
 import Pagination from "@/components/PaginationComponent";
 
@@ -13,12 +13,12 @@ export default function SearchPage() {
   const sort = searchParams.get("sort") ?? "stars";
 
   return (
-    <div className="space-y-8">
+    <div className="mb-4 space-y-4">
       <FilterComponent />
       {query && (
         <div>
           <h2 className="mb-4 text-xl font-semibold">
-            Search Results for "{query}"
+            Search Results for &quot;{query}&quot;
           </h2>
           <RepositoryCard
             query={query}
