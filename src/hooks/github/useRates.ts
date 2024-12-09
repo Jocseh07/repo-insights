@@ -8,6 +8,5 @@ export default function useRates() {
     queryKey: ["rateLimit", "important"],
     queryFn: async () => await octokit?.rest.rateLimit.get(),
     refetchInterval: 1000 * 1,
-    staleTime: 1000 * 1,
   });
 }
