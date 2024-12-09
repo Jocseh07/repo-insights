@@ -8,15 +8,16 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Fragment, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import MDEditor from "@uiw/react-md-editor";
 import { FileReferences } from "@/types/types";
 import useUserQuestions from "@/hooks/questions/useUserQuestions";
 import QASkeleton from "./_components/QASkeleton";
 import QAError from "./_components/QAError";
 import CodeReferences from "./_components/CodeReferences";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-export default async function QAPage() {
+export default function QAPage() {
   const [questionIdx, setQuestionIdx] = useState(0);
   const data = useUserQuestions();
   if (!data.data) return <QASkeleton />;
@@ -25,7 +26,7 @@ export default async function QAPage() {
   const question = questions[questionIdx];
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="">
       <Sheet>
         <div className="h-4" />
         <h1 className="text-xl font-semibold">Questions & Answers History</h1>
@@ -43,6 +44,18 @@ export default async function QAPage() {
                       <span className="whitespace-nowrap text-xs text-muted-foreground">
                         {question.createdAt?.toLocaleDateString()}
                       </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button asChild variant="link" className="p-0">
+                        <Link
+                          href={`/repo/${question.project.repoOwner}/${question.project.repoName}`}
+                        >
+                          <span className="text-muted-foreground">
+                            {question.project.repoOwner}/
+                            {question.project.repoName}
+                          </span>
+                        </Link>
+                      </Button>
                     </div>
                     <p className="line-clamp-1 text-sm text-muted-foreground">
                       {question.answer}
