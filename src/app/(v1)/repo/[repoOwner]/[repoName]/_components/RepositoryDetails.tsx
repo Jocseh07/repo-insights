@@ -57,9 +57,9 @@ export default function RepositoryDetails({
                 <Image
                   src={repo.data.owner.avatar_url}
                   alt={`${repo.data.owner.login}'s avatar`}
-                  width={60}
-                  height={60}
-                  className="rounded border-4 border-primary/10 shadow-lg sm:h-[100px] sm:w-[100px]"
+                  width={40}
+                  height={40}
+                  className="rounded border-4 border-primary/10 shadow-lg sm:h-[80px] sm:w-[80px]"
                 />
                 <div className="space-y-2 sm:space-y-3">
                   <CardTitle className="text-lg sm:text-2xl">
