@@ -53,16 +53,16 @@ export default function RepositoryDetails({
           <div className="flex flex-col gap-6 lg:flex-row">
             {/* Profile Card */}
             <Card className="flex-1">
-              <CardHeader className="flex h-full flex-row items-center gap-6 p-6">
+              <CardHeader className="flex h-full flex-row items-center gap-3 p-4 sm:gap-6 sm:p-6">
                 <Image
                   src={repo.data.owner.avatar_url}
                   alt={`${repo.data.owner.login}'s avatar`}
-                  width={100}
-                  height={100}
-                  className="rounded border-4 border-primary/10 shadow-lg"
+                  width={60}
+                  height={60}
+                  className="rounded border-4 border-primary/10 shadow-lg sm:h-[100px] sm:w-[100px]"
                 />
-                <div className="space-y-3">
-                  <CardTitle className="text-2xl">
+                <div className="space-y-2 sm:space-y-3">
+                  <CardTitle className="text-lg sm:text-2xl">
                     <Link
                       href={repo.data.html_url}
                       target="_blank"
@@ -71,7 +71,7 @@ export default function RepositoryDetails({
                       {repo.data.owner.login}/{repo.data.name}
                     </Link>
                   </CardTitle>
-                  <p className="text-muted-foreground">
+                  <p className="text-sm text-muted-foreground sm:text-base">
                     {repo.data.description}
                   </p>
                   <div className="flex items-center gap-2">
