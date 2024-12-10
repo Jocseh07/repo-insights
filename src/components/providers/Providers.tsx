@@ -11,8 +11,6 @@ const ThemeProvider = dynamic(
   },
 );
 import { ClerkProvider } from "@clerk/nextjs";
-import OctokitProvider from "./OctokitProvider";
-
 export const queryClient = new QueryClient();
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -30,8 +28,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         >
           <QueryClientProvider client={queryClient}>
             <ReactQueryDevtools initialIsOpen={false} />
-
-            <OctokitProvider>{children}</OctokitProvider>
+            {children}
           </QueryClientProvider>
         </ClerkProvider>
       </ThemeProvider>

@@ -18,6 +18,7 @@ import {
 import { checkFiles } from "@/server/actions/github/checkFiles";
 import { indexFiles } from "@/server/actions/github/indexFiles";
 import { useRouter } from "next/navigation";
+import { queryClient } from "@/components/providers/Providers";
 
 interface CreateProjectProps {
   repoOwner: string;
@@ -35,7 +36,6 @@ export const CreateProject = ({
   const [isLoading, setIsLoading] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [docs, setDocs] = useState<CheckFilesReturn>([]);
-  const router = useRouter();
 
   const handleInitialClick = async () => {
     setIsLoading(true);
@@ -86,8 +86,7 @@ export const CreateProject = ({
     if (!isSuccess) {
       await deleteProject({ repoId: currentProject.repoId });
     }
-
-    router.push(`/repo/${repoOwner}/${repoName}`);
+    await queryClient.invalidateQueries({ queryKey: ["projectExists"] });
 
     setIsLoading(false);
     setShowDialog(false);

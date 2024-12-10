@@ -1,7 +1,6 @@
 "use client";
 import { Star, GitFork, Clock } from "lucide-react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { queryClient } from "../../../components/providers/Providers";
 import { ErrorRepositoryCard } from "../qa/_components/ErrorRepositoryCard";
 import { RepositoryCardSkeletons } from "./RepositoryCardSkeletons";
 import { format } from "timeago.js";
@@ -31,7 +30,6 @@ export function RepositoryCard({
     sort,
   });
 
-  void queryClient.invalidateQueries({ queryKey: ["rateLimit"] });
   if (isPending) return <RepositoryCardSkeletons number={per_page} />;
   if (repos === undefined && !isPending) return <ErrorRepositoryCard />;
 

@@ -40,9 +40,15 @@ export const updateProject = async ({
   return await db.update(project).set(data).where(eq(project.repoId, repoId));
 };
 
-export const checkProjectExists = async ({ repoId }: { repoId: number }) => {
+export const checkProjectExists = async ({
+  repoId,
+}: {
+  repoId: number | undefined;
+}) => {
+  if (!repoId) return false;
   const userId = await getUserId();
-  return await db.query.project.findFirst({
+  const projectExists = await db.query.project.findFirst({
     where: and(eq(project.repoId, repoId), eq(project.userId, userId)),
   });
+  return !!projectExists;
 };

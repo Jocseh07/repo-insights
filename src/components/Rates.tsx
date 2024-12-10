@@ -4,8 +4,8 @@ import { Github } from "lucide-react";
 import { Progress } from "./ui/progress";
 import { format } from "timeago.js";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { cn } from "@/lib/utils";
 import useRates from "@/hooks/github/useRates";
+import { cn } from "@/lib/utils";
 export default function Rates() {
   const { data, isPending } = useRates();
   const rates = data?.data;

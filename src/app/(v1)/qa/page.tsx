@@ -30,13 +30,14 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { format } from "timeago.js";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { deleteQuestion } from "@/server/actions/questions/questions";
 import { useRouter } from "next/navigation";
+import useDeleteQuestion from "@/hooks/questions/useDeleteUserQuestions";
 
 export default function QAPage() {
   const router = useRouter();
   const [questionIdx, setQuestionIdx] = useState(0);
   const data = useUserQuestions();
+  const deleteQuestion = useDeleteQuestion();
   if (!data.data) return <QASkeleton />;
   if (data.error) return <QAError />;
   const questions = data.data;
@@ -45,7 +46,7 @@ export default function QAPage() {
   const handleDelete = async (id: string) => {
     toast.promise(
       async () => {
-        await deleteQuestion(id);
+        await deleteQuestion.mutateAsync(id);
       },
       {
         loading: "Deleting question...",

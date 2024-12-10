@@ -12,11 +12,10 @@ import { Badge } from "@/components/ui/badge";
 import RepositoryReadmeDialog from "./RepositoryReadmeDialog";
 import { Button } from "@/components/ui/button";
 import AskQuestionCard from "./AskQuestionCard";
-import { checkProjectExists } from "@/server/actions/project";
-import { useEffect, useState } from "react";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { CreateProject } from "./CreateProject";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useCheckProject } from "@/hooks/projects/useCheckProject";
 
 export default function RepositoryDetails({
   repoOwner,
@@ -25,8 +24,6 @@ export default function RepositoryDetails({
   repoOwner: string;
   repoName: string;
 }) {
-  const [projectExists, setProjectExists] = useState<boolean | null>(null);
-
   const {
     data: repo,
     isLoading,
@@ -35,14 +32,10 @@ export default function RepositoryDetails({
     owner: repoOwner,
     repo: repoName,
   });
-  useEffect(() => {
-    if (!repo?.data.id) return;
-    const checkingProjectExists = async () => {
-      const exists = await checkProjectExists({ repoId: repo.data.id });
-      setProjectExists(!!exists);
-    };
-    void checkingProjectExists();
-  }, [repo?.data.id]);
+  const { isProjectExists, isCheckingProjectExists } = useCheckProject({
+    repoId: repo?.data.id,
+  });
+
   if (isLoading) return <RepositoryDetailsSkeleton />;
   if (error || !repo) return <RepositoryError name="details" />;
 
@@ -150,7 +143,7 @@ export default function RepositoryDetails({
         </CardContent>
       </Card>
       <SignedIn>
-        {projectExists === null ? (
+        {isCheckingProjectExists ? (
           <Card>
             <CardContent className="p-6">
               <div className="flex flex-col gap-4">
@@ -159,7 +152,7 @@ export default function RepositoryDetails({
               </div>
             </CardContent>
           </Card>
-        ) : !projectExists ? (
+        ) : !isProjectExists ? (
           <div className="transition-all duration-200 hover:opacity-95">
             <CreateProject
               repoOwner={repoOwner}
