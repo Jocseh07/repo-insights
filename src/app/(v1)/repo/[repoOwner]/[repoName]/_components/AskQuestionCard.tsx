@@ -8,7 +8,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { readStreamableValue } from "ai/rsc";
 import { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import { Loader2 } from "lucide-react";
@@ -45,9 +44,9 @@ export default function AskQuestionCard({ repoId }: AskQuestionCardProps) {
         setFileReferences(refs);
         setOpen(true);
 
-        for await (const delta of readStreamableValue(output)) {
-          if (delta) {
-            setAnswer((prev) => prev + delta);
+        for await (const part of output) {
+          if (part.choices[0]?.delta?.content) {
+            setAnswer((prev) => prev + part.choices[0]?.delta?.content ?? "");
           }
         }
       },

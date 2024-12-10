@@ -79,7 +79,9 @@ export const sourceCodeEmbedding = createTable(
     id: text("id")
       .primaryKey()
       .$default(() => uuidv4()),
-    summaryEmbedding: vector("summaryEmbedding", { dimensions: 768 }).notNull(),
+    summaryEmbedding: vector("summaryEmbedding", {
+      dimensions: 1536,
+    }).notNull(),
     sourceCode: text("source_code").notNull(),
     fileName: text("file_name").notNull(),
     summary: text("summary").notNull(),

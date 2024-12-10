@@ -1,19 +1,11 @@
 "use server";
 
-import { streamText } from "ai";
-import { createStreamableValue } from "ai/rsc";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
-import { env } from "@/env";
-import { generateCodeEmbeddings } from "../gemini/gemini";
 import { and, cosineDistance, desc, eq, gt, sql } from "drizzle-orm";
 import { question, sourceCodeEmbedding } from "@/server/db/schema";
 import { db } from "@/server/db";
-import { streamTextPrompt } from "@/data/prompts";
 import { getUserId } from "../helpers";
-
-const google = createGoogleGenerativeAI({
-  apiKey: env.GEMINI_API_KEY,
-});
+import { generateFileEmbeddings } from "../models/generateFileEmbeddings";
+import { askQuestionStream } from "../models/askQuestion";
 
 export async function askQuestion({
   question,
@@ -22,10 +14,13 @@ export async function askQuestion({
   question: string;
   repoId: number;
 }) {
-  const stream = createStreamableValue();
-  const embedding = await generateCodeEmbeddings({ text: question });
+  const embedding = await generateFileEmbeddings({ text: question });
+  const embeddingVector = embedding[0]?.embedding;
+  if (!embeddingVector) {
+    throw new Error("No embedding found");
+  }
   // const vectorQuery = `[${queryVector.join(",")}]`;
-  const similarity = sql<number>`1 - (${cosineDistance(sourceCodeEmbedding.summaryEmbedding, embedding)})`;
+  const similarity = sql<number>`1 - (${cosineDistance(sourceCodeEmbedding.summaryEmbedding, embeddingVector)})`;
 
   // const similar = await db.query.sourceCodeEmbedding.findMany({
   //   where: (table, { eq, gt, and }) =>
@@ -56,22 +51,14 @@ export async function askQuestion({
   for (const doc of result) {
     context += `Source: ${doc.filename} \nSource Code: ${doc.sourceCode}\nSummary: ${doc.summary}\nSimilarity: ${doc.similarity}\n\n`;
   }
-  await (async () => {
-    const { textStream } = streamText({
-      model: google("gemini-1.5-flash"),
-      prompt: streamTextPrompt({
-        context,
-        question,
-      }),
-    });
-    for await (const delta of textStream) {
-      stream.update(delta);
-    }
-    stream.done();
-  })();
+
+  const stream = await askQuestionStream({
+    question,
+    context,
+  });
 
   return {
-    output: stream.value,
+    output: stream,
     fileReferences: result,
   };
 }

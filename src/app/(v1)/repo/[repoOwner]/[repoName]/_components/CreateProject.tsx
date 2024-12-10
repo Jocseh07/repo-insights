@@ -87,7 +87,7 @@ export const CreateProject = ({
       await deleteProject({ repoId: currentProject.repoId });
     }
 
-    router.refresh();
+    router.push(`/repo/${repoOwner}/${repoName}`);
 
     setIsLoading(false);
     setShowDialog(false);

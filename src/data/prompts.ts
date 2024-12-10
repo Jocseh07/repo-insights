@@ -50,7 +50,6 @@ export const summarizeCodePrompt = ({
   return `
   You are an intelligent senior software engineer who specializes in onboarding junior software engineers onto projects. You are onboarding a junior software engineer and explaining to them the purpose of the file \n\n ${filename} \n\n and the code \n\n $\`\`\` \n ${code} \n\`\`\` \n\n
   Give a summary of no more than 100 words of the code above
-
   `;
 };
 
