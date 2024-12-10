@@ -1,29 +1,99 @@
-# Create T3 App
+# RepoInsight - AI-Powered GitHub Repository Analysis
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+RepoInsight is a modern web application that helps developers understand GitHub repositories through AI-powered analysis and interactive Q&A capabilities.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- 🧠 **AI-Powered Code Analysis** - Leverage GPT-4o-mini for intelligent code understanding
+- 🔄 **GitHub Integration** - Seamless access to repositories using GitHub authentication
+- ⚡ **Smart Repository Indexing** - Automatic code embedding generation for enhanced search
+- 💬 **Interactive Q&A** - Ask questions about any codebase and get AI-powered explanations
+- 🌐 **Real-time Updates** - Track commits, issues, and releases
+- 🎨 **Modern UI** - Built with shadcn/ui components and Tailwind CSS
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Tech Stack
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- **Framework**: [Next.js 15](https://nextjs.org/) - The React framework for production
+- **Authentication**: [Clerk](https://clerk.com/) - Complete user management and authentication
+- **Database**: [PostgreSQL](https://www.postgresql.org/) with [Neon](https://neon.tech/) serverless hosting, [Drizzle ORM](https://orm.drizzle.team/) and vector support
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) - Re-usable components built with Radix UI and Tailwind
+- **AI Integration**: [GPT-4o-mini](https://github.com/marketplace/models/azure-openai/gpt-4o-mini) - Optimized GPT model for code analysis
+- **Type Safety**: [TypeScript](https://www.typescriptlang.org/) - Static type checking
+- **Data Fetching**: [TanStack Query](https://tanstack.com/query/latest) - Powerful asynchronous state management
+- **GitHub Integration**: [Octokit](https://github.com/octokit/octokit.js) - Official GitHub API client
 
-## Learn More
+## Getting Started
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Prerequisites
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- Node.js 18+
+- pnpm
+- PostgreSQL database (We use [Neon](https://neon.tech)
+  - Run `CREATE EXTENSION vector;` in your database SQL editor before pushing the database
+- Clerk account (Create one and get your API keys by following the [Clerk Next.js quickstart](https://clerk.com/docs/quickstarts/nextjs))
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### Installation
 
-## How do I deploy this?
+1. Clone the repository:
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+```bash
+git clone https://github.com/Jocseh07/repo-insights.git
+cd repo-insight
+```
+
+2. Install dependencies:
+
+```bash
+pnpm install
+```
+
+3. Create a `.env` file in the root directory with the following variables:
+
+```bash
+# Database
+DATABASE_URL=your_database_url
+
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
+CLERK_SECRET_KEY=your_secret_key
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+
+NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL="/sync-user"
+NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL="/sync-user"
+
+# Environment
+NODE_ENV="development"
+```
+
+4. Initialize the database:
+
+```bash
+pnpm db:generate
+pnpm db:push
+```
+
+5. Start the development server:
+
+```bash
+pnpm dev
+```
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Fork this repository
+2. Create a new project on Vercel
+3. Connect your fork
+4. Configure environment variables
+5. Deploy
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
