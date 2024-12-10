@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function RepositoryBranchesSkeleton() {
   return (
@@ -11,10 +12,10 @@ export default function RepositoryBranchesSkeleton() {
           {[1, 2, 3, 4, 5].map((i) => (
             <div
               key={i}
-              className="flex items-center gap-2 rounded-md p-2 text-sm"
+              className="flex items-center gap-2 rounded-md p-2 text-sm text-muted-foreground"
             >
-              <div className="h-4 w-4 animate-pulse rounded-full bg-muted" />
-              <div className="h-4 w-32 animate-pulse rounded bg-muted" />
+              <Skeleton className="h-4 w-4 rounded-full" />
+              <Skeleton className="h-4 flex-1 rounded" />
             </div>
           ))}
         </div>

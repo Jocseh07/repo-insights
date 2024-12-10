@@ -1,20 +1,22 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function RepositoryReleasesSkeleton() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm font-medium">Recent Releases</CardTitle>
+        <CardTitle className="text-sm font-medium">Releases</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-2">
           {[1, 2, 3, 4, 5].map((i) => (
             <div
               key={i}
-              className="flex items-center gap-2 rounded-md p-2 text-sm"
+              className="flex flex-wrap items-center gap-2 rounded-md p-2 text-sm text-muted-foreground"
             >
-              <div className="h-4 w-4 animate-pulse rounded-full bg-muted" />
-              <div className="h-4 w-32 animate-pulse rounded bg-muted" />
+              <Skeleton className="h-4 w-4 rounded-full" />
+              <Skeleton className="h-4 flex-1 rounded" />
+              <Skeleton className="ml-auto h-4 w-16 rounded text-xs" />
             </div>
           ))}
         </div>

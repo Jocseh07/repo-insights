@@ -29,7 +29,14 @@ export default function RepositoryIssues({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm font-medium">Issues</CardTitle>
+        <CardTitle className="text-sm font-medium">
+          <Link
+            href={`https://github.com/${repoOwner}/${repoName}/issues`}
+            target="_blank"
+          >
+            Issues
+          </Link>
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-2">

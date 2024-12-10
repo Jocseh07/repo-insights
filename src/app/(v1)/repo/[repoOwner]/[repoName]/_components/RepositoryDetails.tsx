@@ -151,12 +151,14 @@ export default function RepositoryDetails({
       </Card>
       <SignedIn>
         {projectExists === null ? (
-          <div className="space-y-4 rounded-lg border bg-card p-6 shadow-sm">
-            <div className="flex flex-col gap-4">
-              <Skeleton className="h-6 w-48" />
-              <Skeleton className="h-24 w-full" />
-            </div>
-          </div>
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex flex-col gap-4">
+                <Skeleton className="h-6 w-48" />
+                <Skeleton className="h-24 w-full" />
+              </div>
+            </CardContent>
+          </Card>
         ) : !projectExists ? (
           <div className="transition-all duration-200 hover:opacity-95">
             <CreateProject

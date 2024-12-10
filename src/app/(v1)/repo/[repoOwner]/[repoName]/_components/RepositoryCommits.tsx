@@ -30,7 +30,14 @@ export default function RepositoryCommits({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm font-medium">Recent Commits</CardTitle>
+        <CardTitle className="text-sm font-medium">
+          <Link
+            href={`https://github.com/${repoOwner}/${repoName}/commits`}
+            target="_blank"
+          >
+            Recent Commits
+          </Link>
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-2">

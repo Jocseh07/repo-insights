@@ -31,7 +31,14 @@ export default function RepositoryBranches({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm font-medium">Branches</CardTitle>
+        <CardTitle className="text-sm font-medium">
+          <Link
+            href={`https://github.com/${repoOwner}/${repoName}/branches`}
+            target="_blank"
+          >
+            Branches
+          </Link>
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-2">

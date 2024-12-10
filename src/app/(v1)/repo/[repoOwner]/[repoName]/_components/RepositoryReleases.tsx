@@ -30,7 +30,14 @@ export default function RepositoryReleases({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm font-medium">Recent Releases</CardTitle>
+        <CardTitle className="text-sm font-medium">
+          <Link
+            href={`https://github.com/${repoOwner}/${repoName}/releases`}
+            target="_blank"
+          >
+            Releases
+          </Link>
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-2">
