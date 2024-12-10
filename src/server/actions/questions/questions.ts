@@ -52,6 +52,7 @@ export async function askQuestion({
     context += `Source: ${doc.filename} \nSource Code: ${doc.sourceCode}\nSummary: ${doc.summary}\nSimilarity: ${doc.similarity}\n\n`;
   }
 
+  console.log(context);
   const stream = await askQuestionStream({
     question,
     context,
@@ -72,4 +73,8 @@ export async function getUserQuestions() {
       project: true,
     },
   });
+}
+
+export async function deleteQuestion(id: string) {
+  await db.delete(question).where(eq(question.id, id));
 }

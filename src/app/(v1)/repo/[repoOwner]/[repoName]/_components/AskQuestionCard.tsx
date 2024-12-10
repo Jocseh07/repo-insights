@@ -28,6 +28,7 @@ export default function AskQuestionCard({ repoId }: AskQuestionCardProps) {
   const [loading, setLoading] = useState(false);
   const [fileReferences, setFileReferences] = useState<FileReferences>([]);
   const [answer, setAnswer] = useState("");
+  const [isAnswerSaved, setIsAnswerSaved] = useState(false);
 
   const handleAskQuestion = async () => {
     if (!question.trim()) return;
@@ -61,7 +62,8 @@ export default function AskQuestionCard({ repoId }: AskQuestionCardProps) {
   };
 
   const handleSaveAnswer = async () => {
-    if (!question || !answer) return;
+    setIsAnswerSaved(true);
+    if (!question || !answer || isAnswerSaved) return;
     setLoading(true);
     toast.promise(
       async () =>
@@ -90,7 +92,7 @@ export default function AskQuestionCard({ repoId }: AskQuestionCardProps) {
                 <Button
                   variant={"outline"}
                   className="ml-auto w-fit"
-                  disabled={loading}
+                  disabled={loading || isAnswerSaved}
                   type="button"
                   onClick={handleSaveAnswer}
                 >

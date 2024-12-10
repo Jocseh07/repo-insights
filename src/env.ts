@@ -8,8 +8,6 @@ export const env = createEnv({
       .enum(["development", "test", "production"])
       .default("production"),
     CLERK_SECRET_KEY: z.string(),
-    GITHUB_TOKEN: z.string(),
-    GEMINI_API_KEY: z.string(),
   },
   client: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
@@ -25,10 +23,6 @@ export const env = createEnv({
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
-    // NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL:
-    // process.env.CLERK_SIGN_UP_FORCE_REDIRECT_URL,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
   emptyStringAsUndefined: true,
