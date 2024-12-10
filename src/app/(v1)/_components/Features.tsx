@@ -4,24 +4,27 @@ import { Card, CardContent } from "@/components/ui/card";
 const features = [
   {
     icon: Brain,
-    title: "Smart Code Analysis",
+    title: "AI-Powered Code Analysis",
     description:
-      "AI-powered breakdown of repository structure and architecture",
+      "Leverage GPT-4o-mini for intelligent code understanding and contextual answers",
   },
   {
     icon: Code2,
-    title: "Language Support",
-    description: "Comprehensive analysis for multiple programming languages",
+    title: "GitHub Integration",
+    description:
+      "Seamless access to repositories using your GitHub token and Octokit API",
   },
   {
     icon: Zap,
-    title: "Quick Insights",
-    description: "Get instant summaries of code functionality and dependencies",
+    title: "Smart Repository Indexing",
+    description:
+      "Automatic code embedding generation for enhanced search and analysis",
   },
   {
     icon: Network,
-    title: "Interactive Exploration",
-    description: "Navigate through codebases with intelligent context",
+    title: "Interactive Q&A",
+    description:
+      "Ask questions about any codebase and get AI-powered explanations with code references",
   },
 ];
 
