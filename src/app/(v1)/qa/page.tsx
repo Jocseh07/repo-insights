@@ -16,6 +16,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Fragment, useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
@@ -25,7 +26,7 @@ import QASkeleton from "./_components/QASkeleton";
 import QAError from "./_components/QAError";
 import CodeReferences from "./_components/CodeReferences";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { format } from "timeago.js";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
@@ -35,7 +36,6 @@ import { useRouter } from "next/navigation";
 export default function QAPage() {
   const router = useRouter();
   const [questionIdx, setQuestionIdx] = useState(0);
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const data = useUserQuestions();
   if (!data.data) return <QASkeleton />;
   if (data.error) return <QAError />;
@@ -54,7 +54,6 @@ export default function QAPage() {
       },
     );
     router.refresh();
-    setShowDeleteDialog(false);
   };
 
   return (
@@ -101,15 +100,32 @@ export default function QAPage() {
                     </div>
                   </div>
                 </SheetTrigger>
-                <Button
-                  variant="destructive"
-                  size="icon"
-                  onClick={async () => {
-                    await handleDelete(question.id);
-                  }}
-                >
-                  <Trash2 className="h-4 w-4 text-muted-foreground" />
-                </Button>
+
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="destructive" size="icon">
+                      <Trash2 className="h-4 w-4 text-muted-foreground" />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete your question and its answer.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={() => handleDelete(question.id)}
+                        className={buttonVariants({ variant: "destructive" })}
+                      >
+                        Delete
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             </Fragment>
           ))}
@@ -131,22 +147,6 @@ export default function QAPage() {
           </SheetHeader>
         </SheetContent>
       </Sheet>
-
-      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              question and its answer.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </>
   );
 }
