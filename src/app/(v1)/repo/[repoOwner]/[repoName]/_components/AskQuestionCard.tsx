@@ -46,7 +46,7 @@ export default function AskQuestionCard({ repoId }: AskQuestionCardProps) {
 
         for await (const part of output) {
           if (part.choices[0]?.delta?.content) {
-            setAnswer((prev) => prev + part.choices[0]?.delta?.content ?? "");
+            setAnswer((prev) => prev + (part.choices[0]?.delta?.content ?? ""));
           }
         }
       },
